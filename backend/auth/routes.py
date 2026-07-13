@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 from auth.dependencies import get_current_user, get_user_store
 from auth.service import COOKIE_NAME, TOKEN_EXPIRE_DAYS, create_token, verify_password
-from settings import Settings, get_settings
 from users.store import UserStore
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -19,7 +18,6 @@ class LoginRequest(BaseModel):
 async def login(
     body: LoginRequest,
     response: Response,
-    settings: Settings = Depends(get_settings),
     store: UserStore = Depends(get_user_store),
 ):
     user = store.get_by_email(body.email)
@@ -29,12 +27,13 @@ async def login(
         raise HTTPException(status_code=403, detail="Account is deactivated")
 
     token = create_token(str(user["_id"]), user["email"], user["role"])
+    # SameSite=None + Secure required — frontend and backend are on different origins
     response.set_cookie(
         key=COOKIE_NAME,
         value=token,
         httponly=True,
-        secure=settings.env == "production",
-        samesite="lax",
+        secure=True,
+        samesite="none",
         max_age=TOKEN_EXPIRE_DAYS * 86400,
         path="/",
     )
@@ -48,7 +47,7 @@ async def login(
 
 @router.post("/logout")
 async def logout(response: Response):
-    response.delete_cookie(key=COOKIE_NAME, path="/")
+    response.delete_cookie(key=COOKIE_NAME, path="/", samesite="none", secure=True)
     return {"ok": True}
 
 
