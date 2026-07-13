@@ -1,6 +1,6 @@
 import type { SelectHTMLAttributes } from "react";
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   size?: "sm" | "md";
 }
 

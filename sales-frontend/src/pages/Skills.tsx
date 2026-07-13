@@ -396,7 +396,7 @@ export default function SkillsPage() {
               </div>
               {catalogMeta && catalogMeta.pages > 1 && (
                 <div className="mt-4">
-                  <Pagination meta={catalogMeta} page={catalogPage} onPageChange={setCatalogPage} />
+                  <Pagination meta={catalogMeta} onChange={setCatalogPage} />
                 </div>
               )}
             </>
@@ -438,7 +438,7 @@ export default function SkillsPage() {
               </div>
               {meta && meta.pages > 1 && (
                 <div className="mt-4">
-                  <Pagination meta={meta} page={page} onPageChange={setPage} />
+                  <Pagination meta={meta} onChange={setPage} />
                 </div>
               )}
             </>

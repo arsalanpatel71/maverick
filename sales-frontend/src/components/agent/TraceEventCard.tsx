@@ -59,7 +59,7 @@ export default function TraceEventCard({ event, capsule }: { event: TraceEvent; 
         <span>{meta.label}</span>
 
         {/* inline summary chips */}
-        {event.type === "rag_start" && data.query && (
+        {event.type === "rag_start" && !!data.query && (
           <span className="ml-1 font-normal opacity-70 truncate max-w-[160px]">"{String(data.query)}"</span>
         )}
         {event.type === "rag_result" && (
@@ -68,10 +68,10 @@ export default function TraceEventCard({ event, capsule }: { event: TraceEvent; 
         {event.type === "memory_loaded" && (
           <span className="ml-1 font-normal opacity-70">{String(data.messages_loaded ?? 0)} msg{Number(data.messages_loaded) !== 1 ? "s" : ""}</span>
         )}
-        {(event.type === "llm_start" || event.type === "llm_end") && data.model && (
+        {(event.type === "llm_start" || event.type === "llm_end") && !!data.model && (
           <span className="ml-1 font-mono font-normal opacity-70 truncate">{String(data.model)}</span>
         )}
-        {event.type === "trace_start" && data.model && (
+        {event.type === "trace_start" && !!data.model && (
           <span className="ml-1 font-mono font-normal opacity-70 truncate">{String(data.model)}</span>
         )}
 
@@ -84,10 +84,10 @@ export default function TraceEventCard({ event, capsule }: { event: TraceEvent; 
         <div className="px-3 pb-2 space-y-1 border-t border-amber-200/60">
           <p className="mt-1.5 font-mono opacity-80 break-words">{String(data.query)}</p>
           <div className="flex flex-wrap gap-1.5 mt-1">
-            {data.retrieval_type && (
+            {!!data.retrieval_type && (
               <span className="px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 font-medium">{String(data.retrieval_type)}</span>
             )}
-            {data.top_k && (
+            {!!data.top_k && (
               <span className="px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 font-medium">top {String(data.top_k)}</span>
             )}
           </div>
@@ -136,12 +136,12 @@ export default function TraceEventCard({ event, capsule }: { event: TraceEvent; 
       )}
 
       {/* skill tool call / result */}
-      {event.type === "skill_tool_call" && data.skill_name && (
+      {event.type === "skill_tool_call" && !!data.skill_name && (
         <div className="px-3 pb-2 border-t border-teal-200/60 pt-1.5">
           <p className="font-mono opacity-80">→ {String(data.skill_name)}</p>
         </div>
       )}
-      {event.type === "skill_tool_result" && data.skill_name && (
+      {event.type === "skill_tool_result" && !!data.skill_name && (
         <div className="px-3 pb-2 border-t border-emerald-200/60 pt-1.5">
           <span className="font-mono opacity-80">{String(data.skill_name)}</span>
           {data.content_length !== undefined && (
@@ -151,11 +151,11 @@ export default function TraceEventCard({ event, capsule }: { event: TraceEvent; 
       )}
 
       {/* capsule events */}
-      {event.type === "capsule_creating" && data.name && (
+      {event.type === "capsule_creating" && !!data.name && (
         <div className="px-3 pb-2 border-t border-sky-200/60 pt-1.5 flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full border-2 border-sky-400 border-t-transparent animate-spin flex-shrink-0" />
           <span className="opacity-80 truncate">{String(data.name)}</span>
-          {data.format_type && (
+          {!!data.format_type && (
             <span className="ml-auto text-[10px] font-medium uppercase tracking-wider opacity-50 flex-shrink-0">
               {String(data.format_type)}
             </span>
@@ -169,34 +169,34 @@ export default function TraceEventCard({ event, capsule }: { event: TraceEvent; 
           ) : (
             <div className="flex items-center gap-2 text-xs opacity-70">
               <span className="font-mono truncate">{String(data.name ?? "Capsule")}</span>
-              {data.format_type && (
+              {!!data.format_type && (
                 <span className="text-[10px] font-medium uppercase tracking-wider opacity-50">{String(data.format_type)}</span>
               )}
-              {data.has_file && <span className="ml-auto text-emerald-600">+ file</span>}
+              {!!data.has_file && <span className="ml-auto text-emerald-600">+ file</span>}
             </div>
           )}
         </div>
       )}
-      {event.type === "capsule_error" && data.detail && (
+      {event.type === "capsule_error" && !!data.detail && (
         <div className="px-3 pb-2 border-t border-red-200/60 pt-1.5">
           <p className="font-mono opacity-80 break-words">{String(data.detail)}</p>
         </div>
       )}
 
       {/* error */}
-      {event.type === "error" && data.detail && (
+      {event.type === "error" && !!data.detail && (
         <div className="px-3 pb-2 border-t border-red-200/60 pt-1.5">
           <p className="font-mono opacity-80 break-words">{String(data.detail)}</p>
         </div>
       )}
 
       {/* manager events */}
-      {data.agent_name && (
+      {!!data.agent_name && (
         <div className="px-3 pb-2 border-t border-current/10 pt-1.5">
           <p className="opacity-80">→ {String(data.agent_name)}</p>
         </div>
       )}
-      {data.decision && (
+      {!!data.decision && (
         <div className="px-3 pb-2 border-t border-current/10 pt-1.5">
           <p className="opacity-80">{String(data.decision)}</p>
         </div>
