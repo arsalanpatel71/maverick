@@ -1,0 +1,42 @@
+# ── IDE / AI tools ──────────────────────────────────────────
+.cursor/
+.claude/
+.antigravity/
+.kiro/
+.codex/
+.copilot/
+.vscode/
+.idea/
+
+# ── OS ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+env/
+
+# ── Secrets ─────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Node / Frontend ─────────────────────────────────────────
+node_modules/
+dist/
+.next/
+.nuxt/
+build/
+
+# ── Logs / tmp ──────────────────────────────────────────────
+*.log
+tmp/
+.temp/
+
+# ── Reference folders (read-only, not for production) ───────
+other_reference/
+backend/rag/services/references/

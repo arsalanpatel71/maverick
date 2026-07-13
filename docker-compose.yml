@@ -1,0 +1,8 @@
+services:
+  backend:
+    image: <account-id>.dkr.ecr.<region>.amazonaws.com/agent-builder:latest
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped

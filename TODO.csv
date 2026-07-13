@@ -1,0 +1,8 @@
+ID,Task,Priority,Status,Area,Added,Notes,Done By
+001,Show warning in agent form when Perplexity sonar or sonar-pro model is selected — these models do live web search which conflicts with RAG and memory,P3,Todo,Frontend,2026-05-15,Warn near the model selector dropdown in AgentDetail.tsx,Arsalan
+002,Manager agent functionality — backend,P1,Done,Backend,2026-05-15,Build manager agent logic on the backend first before frontend work,Arsalan
+003,Manager agent functionality — frontend,P1,Done,Frontend,2026-05-15,Frontend work to follow after backend is complete,Arsalan
+004,Enhance layout of the agent detail page (agent/{id}),P3,Todo,Frontend,2026-05-15,Improve overall layout and UX of the AgentDetail page,Arsalan
+005,Add structured JSON output support in the agent system,P1,In Progress,Backend,2026-05-15,Allow agents to return structured JSON responses,Arsalan
+006,Add traces/history in the app — confirm backend trace storage then build frontend view,P2,Todo,Backend,2026-05-16,Verify backend persists traces per session then surface them in a history/traces UI,Arsalan
+007,Assets — allow users to upload files (PDF / Excel / docs) for querying via LLM,P1,Todo,Full Stack,2026-05-16,File upload UI + backend ingestion pipeline so uploaded files can be searched/queried by agents,Arsalan
