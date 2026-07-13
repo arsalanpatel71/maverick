@@ -20,7 +20,7 @@ def _client(settings: "Settings"):
 
 def upload_bytes(data: bytes, key: str, content_type: str, settings: "Settings") -> str:
     _client(settings).put_object(
-        Bucket=settings.aws_storage_bucket_name,
+        Bucket=settings.app_aws_storage_bucket_name,
         Key=key,
         Body=data,
         ContentType=content_type,
@@ -31,7 +31,7 @@ def upload_bytes(data: bytes, key: str, content_type: str, settings: "Settings")
 def generate_presigned_url(key: str, settings: "Settings", expires: int = 3600) -> str:
     return _client(settings).generate_presigned_url(
         "get_object",
-        Params={"Bucket": settings.aws_storage_bucket_name, "Key": key},
+        Params={"Bucket": settings.app_aws_storage_bucket_name, "Key": key},
         ExpiresIn=expires,
     )
 

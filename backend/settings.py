@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     app_aws_access_key_id: str = Field(default="")
     app_aws_secret_access_key: str = Field(default="")
     app_aws_region: str = Field(default="us-east-1")
-    aws_storage_bucket_name: str = Field(default="")
+    app_aws_storage_bucket_name: str = Field(default="")
 
 
 @lru_cache

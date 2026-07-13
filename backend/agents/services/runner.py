@@ -188,7 +188,7 @@ async def _auto_detect_capsules(
 
     created: list[dict] = []
     seen: set[int] = set()
-    has_s3 = bool(settings.app_aws_access_key_id and settings.aws_storage_bucket_name)
+    has_s3 = bool(settings.app_aws_access_key_id and settings.app_aws_storage_bucket_name)
 
     # ── Path 1: code blocks ───────────────────────────────────────────────────
     for match in _CODE_BLOCK_RE.finditer(content):
